@@ -197,14 +197,19 @@ window.PORTFOLIO = {
       "result": "Интегрирована система для онлайн-трансляций богослужений.",
       "photos": [
         {
-          "src": "",
-          "alt": "Система трансляций в монастыре — общий вид",
-          "caption": "Общий вид системы"
+          "src": "assets/photos/monastery/monastery-01-editorial.png",
+          "alt": "PTZ-камера и иконы в интерьере монастыря",
+          "caption": "PTZ-камера в интерьере монастыря"
         },
         {
-          "src": "",
-          "alt": "Система трансляций в монастыре — оборудование",
-          "caption": "Оборудование и интеграция"
+          "src": "assets/photos/monastery/monastery-02-editorial.png",
+          "alt": "Камера для трансляций на фоне икон",
+          "caption": "Камера и иконописное убранство"
+        },
+        {
+          "src": "assets/photos/monastery/monastery-03-editorial.png",
+          "alt": "Интерьер монастыря с установленной камерой",
+          "caption": "Интерьер храма"
         }
       ]
     },
