@@ -93,11 +93,6 @@ window.PORTFOLIO = {
           "caption": "AstraZeneca «Перспектива» — визуализация зала · обложка"
         },
         {
-          "src": "assets/photos/perspective-team-2025.jpg",
-          "alt": "Подготовка сценической площадки проекта «Перспектива»",
-          "caption": "Подготовка площадки · «Перспектива»"
-        },
-        {
           "src": "assets/photos/perspective-2025-live.jpg",
           "alt": "Конференция AstraZeneca «Перспектива» — работа площадки и трансляционной команды",
           "caption": "AstraZeneca «Перспектива» · работа площадки"
@@ -231,6 +226,11 @@ window.PORTFOLIO = {
           "src": "assets/photos/theatre-backstage-2025.jpg",
           "alt": "Сцена театральной постановки с проекциями и светом",
           "caption": "Театральная постановка · сцена и проекции"
+        },
+        {
+          "src": "assets/photos/perspective-team-2025.jpg",
+          "alt": "Театральная сцена с проекциями, зелёным покрытием и декорациями",
+          "caption": "Сценическая площадка · театр"
         },
         {
           "src": "assets/photos/theatre-2024-stage.jpg",
