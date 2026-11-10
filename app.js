@@ -23,7 +23,7 @@
     return '<span class="art-grid" aria-hidden="true"></span><span class="art-geometry" aria-hidden="true"></span>' +
       '<span class="art-id" aria-hidden="true">PROJECT / 0' + (index+1) + '</span>' +
       '<span class="art-title" aria-hidden="true">' + (art[p.id] || escape(p.title)) + '</span>' +
-      '<span class="photo-label">Место для фото проекта</span><span class="art-open" aria-hidden="true">↗</span>';
+      '<span class="photo-label">Место для фото проекта</span><span class="art-open" aria-hidden="true"><svg class="arrow-icon arrow-diagonal" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 18 18 6M8 6h10v10"/></svg></span>';
   }
   data.projects.forEach((p, index) => {
     const card = document.createElement("article");
@@ -33,7 +33,7 @@
       '" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Открыть проект: ' + escape(p.title) + '">' + artHTML(p, index) +
       '</div><div class="card-gallery-controls" aria-label="Фотографии проекта"></div></div><div class="project-copy"><p class="project-type">' + escape(p.type) + '</p><h3>' +
       escape(p.title) + '</h3><p class="project-subtitle">' + escape(p.subtitle) +
-      '</p><button class="project-open" data-open="' + escape(p.id) + '" aria-haspopup="dialog">О проекте и галерея <span aria-hidden="true">↗</span></button></div>';
+      '</p><button class="project-open" data-open="' + escape(p.id) + '" aria-haspopup="dialog">О проекте и галерея <svg class="arrow-icon arrow-diagonal" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 18 18 6M8 6h10v10"/></svg></button></div>';
     const cardPhotos = (p.photos || []).filter(photo => safeImage(photo.src));
     const cover = cardPhotos[0];
     if (cover) {
@@ -186,9 +186,9 @@
       '<div class="gallery-stage" role="region" aria-label="Галерея проекта">' +
       '<div id="gallery-frame" class="gallery-frame"></div><div class="gallery-toolbar">' +
       '<p class="gallery-caption" id="gallery-caption" aria-live="polite"></p>' +
-      '<div class="gallery-controls"><button id="gallery-prev" aria-label="Предыдущая фотография">←</button>' +
+      '<div class="gallery-controls"><button id="gallery-prev" aria-label="Предыдущая фотография"><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5 8 12l7 7"/></svg></button>' +
       '<span class="gallery-count" id="gallery-count" aria-live="polite"></span>' +
-      '<button id="gallery-next" aria-label="Следующая фотография">→</button></div></div>' +
+      '<button id="gallery-next" aria-label="Следующая фотография"><svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg></button></div></div>' +
       '<div class="gallery-thumbs" role="group" aria-label="Выбор фотографии"></div></div>' +
       '<div class="dialog-details">' + (project.role ? '<div><p class="detail-label">РОЛЬ В ПРОЕКТЕ</p><p class="detail-role">' + escape(project.role) + '</p></div>' : '') +
       (project.tasks?.length ? '<div><p class="detail-label">ЗОНА ОТВЕТСТВЕННОСТИ</p><ul>' + project.tasks.map(task => '<li>' + escape(task) + '</li>').join("") + '</ul>' +
@@ -301,7 +301,7 @@
         a.className = top ? "header-contact-link" : "contact-link";
         a.href = item.url;
         if (top) { a.innerHTML = icons[type] + '<span>' + escape(item.label) + '</span>'; a.setAttribute("aria-label", item.label + (type === "telegram" ? " — открыть Telegram" : "")); }
-        else { a.textContent = item.label; const arrow = document.createElement("span"); arrow.textContent = "↗"; arrow.setAttribute("aria-hidden","true"); a.append(arrow); }
+        else { a.textContent = item.label; const arrow = document.createElement("span"); arrow.innerHTML = '<svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 18 18 6M8 6h10v10"/></svg>'; arrow.setAttribute("aria-hidden","true"); a.append(arrow); }
         if (item.url.startsWith("https:")) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
         block.append(a);
       });
