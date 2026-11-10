@@ -10,9 +10,9 @@ window.PORTFOLIO = {
       "position": "50% 35%"
     },
     "contacts": {
-      "email": "",
-      "phone": "",
-      "telegram": ""
+      "phone": "+7 918 186-95-18",
+      "email": "krd@avstream.ru",
+      "telegram": "avstream_krd"
     }
   },
   "projects": [

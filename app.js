@@ -301,5 +301,5 @@
     });
   }
   $("#print-projects").innerHTML = '<h2>Избранные проекты</h2>' + data.projects.map(p => '<article><h3>' + escape(p.title) + '</h3><p class="print-role">' + escape(p.role) + '</p><p>' + escape(p.summary) + '</p>' + (p.tasks?.length ? '<ul>' + p.tasks.map(t=>'<li>'+escape(t)+'</li>').join("") + '</ul>' : "") + '</article>').join("");
-  document.querySelectorAll(".print-button").forEach(button => button.addEventListener("click", () => window.print()));
+
 })();

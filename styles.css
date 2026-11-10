@@ -97,3 +97,5 @@ dialog{background:#f1efe9;color:var(--text);border-color:#b5a49a}dialog::backdro
 .card-gallery-dot:focus-visible{outline:2px solid #fffaf5;outline-offset:3px}
 .project-card:first-child .card-gallery-dots{bottom:15px}
 }
+.resume-download{display:inline-flex;align-items:center;color:inherit;text-decoration:none}
+.resume-download:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
