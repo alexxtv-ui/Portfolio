@@ -29,12 +29,13 @@
     const card = document.createElement("article");
     card.className = "project-card";
     card.dataset.category = p.category;
-    card.innerHTML = '<button class="project-art art-' + escape(p.id) + '" data-open="' + escape(p.id) +
-      '" aria-haspopup="dialog" aria-label="Открыть проект: ' + escape(p.title) + '">' + artHTML(p, index) +
-      '</button><div class="project-copy"><p class="project-type">' + escape(p.type) + '</p><h3>' +
+    card.innerHTML = '<div class="project-media"><div class="project-art art-' + escape(p.id) + '" data-open="' + escape(p.id) +
+      '" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Открыть проект: ' + escape(p.title) + '">' + artHTML(p, index) +
+      '</div><div class="card-gallery-controls" aria-label="Фотографии проекта"></div></div><div class="project-copy"><p class="project-type">' + escape(p.type) + '</p><h3>' +
       escape(p.title) + '</h3><p class="project-subtitle">' + escape(p.subtitle) +
       '</p><button class="project-open" data-open="' + escape(p.id) + '" aria-haspopup="dialog">О проекте и галерея <span aria-hidden="true">↗</span></button></div>';
-    const cover = (p.photos || []).find(photo => safeImage(photo.src));
+    const cardPhotos = (p.photos || []).filter(photo => safeImage(photo.src));
+    const cover = cardPhotos[0];
     if (cover) {
       const poster = $(".project-art", card);
       poster.classList.add("has-cover");
@@ -48,6 +49,56 @@
       label.textContent = "Галерея проекта";
       img.addEventListener("error", () => { img.remove(); label.textContent = "Место для фото проекта"; });
       poster.insertBefore(img, $(".photo-label", poster));
+      if (cardPhotos.length > 1) {
+        const controls = $(".card-gallery-controls", card);
+        const dots = document.createElement("div");
+        dots.className = "card-gallery-dots";
+        dots.setAttribute("role", "group");
+        dots.setAttribute("aria-label", "Выбрать фото проекта");
+        let cardPhotoIndex = 0;
+        const renderCardPhoto = index => {
+          cardPhotoIndex = (index + cardPhotos.length) % cardPhotos.length;
+          const selected = cardPhotos[cardPhotoIndex];
+          img.src = safeImage(selected.src);
+          img.alt = selected.alt || p.title;
+          img.style.objectPosition = selected.position || "50% 50%";
+          dots.querySelectorAll("button").forEach((dot, i) => {
+            if (i === cardPhotoIndex) dot.setAttribute("aria-current", "true");
+            else dot.removeAttribute("aria-current");
+          });
+        };
+        const makeArrow = (direction, labelText, glyph) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "card-gallery-arrow card-gallery-arrow-" + direction;
+          button.setAttribute("aria-label", labelText);
+          button.textContent = glyph;
+          button.addEventListener("click", event => { event.stopPropagation(); renderCardPhoto(cardPhotoIndex + (direction === "next" ? 1 : -1)); });
+          controls.append(button);
+        };
+        makeArrow("prev", "Предыдущее фото", "←");
+        makeArrow("next", "Следующее фото", "→");
+        cardPhotos.forEach((item, i) => {
+          const dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "card-gallery-dot";
+          dot.setAttribute("aria-label", "Фото " + (i + 1) + " из " + cardPhotos.length);
+          dot.addEventListener("click", event => { event.stopPropagation(); renderCardPhoto(i); });
+          dots.append(dot);
+        });
+        controls.append(dots);
+        renderCardPhoto(0);
+        let startX = null;
+        let suppressOpen = false;
+        poster.addEventListener("pointerdown", event => { startX = event.clientX; suppressOpen = false; }, {passive:true});
+        poster.addEventListener("pointerup", event => {
+          if (startX === null) return;
+          const delta = event.clientX - startX; startX = null;
+          if (Math.abs(delta) > 42) { renderCardPhoto(cardPhotoIndex + (delta < 0 ? 1 : -1)); suppressOpen = true; }
+        }, {passive:true});
+        poster.addEventListener("click", event => { if (suppressOpen) { event.preventDefault(); event.stopPropagation(); suppressOpen = false; } });
+      }
+      poster.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); poster.click(); } });
     }
     grid.append(card);
   });
