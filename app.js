@@ -79,12 +79,43 @@
     const frame = $("#gallery-frame");
     frame.innerHTML = emptyPhoto;
     const url = safeImage(photo.src);
+    frame.replaceChildren();
     if (url) {
       const img = document.createElement("img");
       img.alt = photo.alt || project.title;
       img.src = url;
-      img.addEventListener("error", () => { frame.innerHTML = emptyPhoto; });
-      frame.replaceChildren(img);
+      img.addEventListener("error", () => { img.remove(); frame.prepend(document.createRange().createContextualFragment(emptyPhoto)); });
+      frame.append(img);
+    } else {
+      frame.insertAdjacentHTML("afterbegin", emptyPhoto);
+    }
+    if (photos.length > 1) {
+      const prev = document.createElement("button");
+      prev.className = "gallery-side-arrow gallery-side-prev";
+      prev.type = "button";
+      prev.setAttribute("aria-label", "Предыдущая фотография");
+      prev.textContent = "←";
+      prev.addEventListener("click", () => showPhoto(photoIndex - 1));
+      const next = document.createElement("button");
+      next.className = "gallery-side-arrow gallery-side-next";
+      next.type = "button";
+      next.setAttribute("aria-label", "Следующая фотография");
+      next.textContent = "→";
+      next.addEventListener("click", () => showPhoto(photoIndex + 1));
+      const dots = document.createElement("div");
+      dots.className = "gallery-dots";
+      dots.setAttribute("role", "group");
+      dots.setAttribute("aria-label", "Выбор фотографии");
+      photos.forEach((item, i) => {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "gallery-dot";
+        dot.setAttribute("aria-label", "Фотография " + (i + 1) + " из " + photos.length);
+        if (i === photoIndex) dot.setAttribute("aria-current", "true");
+        dot.addEventListener("click", () => showPhoto(i));
+        dots.append(dot);
+      });
+      frame.append(prev, next, dots);
     }
     $("#gallery-caption").textContent = photo.caption || project.title;
     $("#gallery-count").textContent = (photoIndex + 1) + " / " + photos.length;
@@ -131,6 +162,15 @@
     });
     $("#gallery-prev").addEventListener("click", () => showPhoto(photoIndex-1));
     $("#gallery-next").addEventListener("click", () => showPhoto(photoIndex+1));
+    const galleryFrame = $("#gallery-frame");
+    let swipeStartX = null;
+    galleryFrame.addEventListener("touchstart", event => { swipeStartX = event.changedTouches[0]?.clientX ?? null; }, {passive:true});
+    galleryFrame.addEventListener("touchend", event => {
+      if (swipeStartX === null) return;
+      const deltaX = event.changedTouches[0].clientX - swipeStartX;
+      swipeStartX = null;
+      if (Math.abs(deltaX) > 45) showPhoto(photoIndex + (deltaX < 0 ? 1 : -1));
+    }, {passive:true});
     showPhoto(0);
     document.body.classList.add("modal-open");
     dialog.showModal();

@@ -69,3 +69,15 @@ dialog{background:#f1efe9;color:var(--text);border-color:#b5a49a}dialog::backdro
 
 /* На фотографиях проекта оставляем сам кадр без декоративной полупрозрачной надписи. */
 .project-art.has-cover .art-title,.project-art.has-cover .art-id{display:none!important}
+
+
+/* Галерея: перелистывание прямо по кадру. */
+.gallery-frame{isolation:isolate}
+.gallery-side-arrow{position:absolute;z-index:2;top:50%;transform:translateY(-50%);width:48px;height:58px;display:grid;place-items:center;border:1px solid #f1efe9a8;background:#24211f9c;color:#fffaf5;font-size:26px;line-height:1;backdrop-filter:blur(5px);transition:background .18s ease,transform .18s ease}
+.gallery-side-arrow:hover{background:#842536e8;transform:translateY(-50%) scale(1.04)}
+.gallery-side-prev{left:14px}.gallery-side-next{right:14px}
+.gallery-dots{position:absolute;z-index:2;left:50%;bottom:15px;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:9px;max-width:calc(100% - 100px);padding:9px 12px;border:1px solid #ffffff55;border-radius:99px;background:#24211f88;backdrop-filter:blur(6px);overflow-x:auto}
+.gallery-dot{flex:0 0 9px;width:9px;height:9px;min-width:9px;padding:0;border:0;border-radius:50%;background:#fffaf58a;transition:background .18s ease,transform .18s ease}
+.gallery-dot[aria-current=true]{background:#fffaf5;transform:scale(1.35)}
+.gallery-side-arrow:focus-visible,.gallery-dot:focus-visible{outline:2px solid #fffaf5;outline-offset:3px}
+@media(max-width:760px){.gallery-side-arrow{width:38px;height:46px;font-size:21px;background:#24211f9e}.gallery-side-prev{left:8px}.gallery-side-next{right:8px}.gallery-dots{bottom:10px;gap:8px;padding:8px 11px;max-width:calc(100% - 76px)}.gallery-dot{flex-basis:8px;width:8px;height:8px;min-width:8px}}
