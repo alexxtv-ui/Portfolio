@@ -72,7 +72,7 @@
           button.type = "button";
           button.className = "card-gallery-arrow card-gallery-arrow-" + direction;
           button.setAttribute("aria-label", labelText);
-          button.textContent = glyph;
+          button.innerHTML = direction === "prev" ? '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5 8 12l7 7"/></svg>' : '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg>';
           button.addEventListener("click", event => { event.stopPropagation(); renderCardPhoto(cardPhotoIndex + (direction === "next" ? 1 : -1)); });
           controls.append(button);
         };
@@ -145,13 +145,13 @@
       prev.className = "gallery-side-arrow gallery-side-prev";
       prev.type = "button";
       prev.setAttribute("aria-label", "Предыдущая фотография");
-      prev.textContent = "←";
+      prev.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5 8 12l7 7"/></svg>';
       prev.addEventListener("click", () => showPhoto(photoIndex - 1));
       const next = document.createElement("button");
       next.className = "gallery-side-arrow gallery-side-next";
       next.type = "button";
       next.setAttribute("aria-label", "Следующая фотография");
-      next.textContent = "→";
+      next.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7"/></svg>';
       next.addEventListener("click", () => showPhoto(photoIndex + 1));
       const dots = document.createElement("div");
       dots.className = "gallery-dots";
@@ -287,18 +287,27 @@
   if (/^\+?[\d ()-]{7,25}$/.test(phone)) links.push({label:phone,url:"tel:" + phone.replace(/[^+\d]/g,"")});
   if (/^[a-zA-Z0-9_]{5,32}$/.test(telegram)) links.push({label:"Telegram",url:"https://t.me/" + telegram});
   if (links.length) {
-    const block = $("#contact-links");
-    block.replaceChildren();
-    links.forEach(item => {
-      const a = document.createElement("a");
-      a.className = "contact-link";
-      a.href = item.url;
-      a.textContent = item.label;
-      const arrow = document.createElement("span");
-      arrow.textContent = "↗"; arrow.setAttribute("aria-hidden","true"); a.append(arrow);
-      if (item.url.startsWith("https:")) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
-      block.append(a);
-    });
+    const icons = {
+      phone: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 3h3l1.5 4-2 1.5a15 15 0 0 0 6 6l1.5-2 4 1.5v3c0 1.1-.9 2-2 2C11 19 5 13 5 5c0-1.1.9-2 2-2Z"/></svg>',
+      email: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m4 7 8 6 8-6"/></svg>',
+      telegram: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m21 3-7.5 18-3.8-7.2L3 10.5 21 3Z"/><path d="m9.7 13.8 4.1-4.1"/></svg>'
+    };
+    const renderLinks = (block, top = false) => {
+      if (!block) return;
+      block.replaceChildren();
+      links.forEach(item => {
+        const type = item.url.startsWith("mailto:") ? "email" : item.url.startsWith("tel:") ? "phone" : "telegram";
+        const a = document.createElement("a");
+        a.className = top ? "header-contact-link" : "contact-link";
+        a.href = item.url;
+        if (top) { a.innerHTML = icons[type] + '<span>' + escape(item.label) + '</span>'; a.setAttribute("aria-label", item.label + (type === "telegram" ? " — открыть Telegram" : "")); }
+        else { a.textContent = item.label; const arrow = document.createElement("span"); arrow.textContent = "↗"; arrow.setAttribute("aria-hidden","true"); a.append(arrow); }
+        if (item.url.startsWith("https:")) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
+        block.append(a);
+      });
+    };
+    renderLinks($("#contact-links"));
+    renderLinks($("#header-contacts"), true);
   }
   $("#print-projects").innerHTML = '<h2>Избранные проекты</h2>' + data.projects.map(p => '<article><h3>' + escape(p.title) + '</h3><p class="print-role">' + escape(p.role) + '</p><p>' + escape(p.summary) + '</p>' + (p.tasks?.length ? '<ul>' + p.tasks.map(t=>'<li>'+escape(t)+'</li>').join("") + '</ul>' : "") + '</article>').join("");
 
