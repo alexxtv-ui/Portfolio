@@ -181,7 +181,7 @@
     img.alt = portrait.alt || "Александр Тюрин";
     img.style.objectPosition = portrait.position || "50% 35%";
     img.decoding = "async";
-    img.addEventListener("load", () => { $(".portrait-art", figure).hidden = true; $(".portrait-status", figure).textContent = "Руководитель AV-проектов"; });
+    img.addEventListener("load", () => { $(".portrait-art", figure).hidden = true; $(".portrait-status", figure).textContent = "Руководитель событийных проектов"; });
     img.addEventListener("error", () => { img.remove(); $(".portrait-art", figure).hidden = false; $(".portrait-status", figure).textContent = "Место для портрета"; });
     figure.prepend(img);
   }

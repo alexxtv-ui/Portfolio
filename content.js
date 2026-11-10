@@ -131,6 +131,21 @@ window.PORTFOLIO = {
       "result": "",
       "photos": [
         {
+          "src": "assets/photos/school21-stavropol-campus-editorial.jpg",
+          "alt": "Здание кампуса Школы 21 в Ставрополе зимой",
+          "caption": "Кампус «Школы 21» · Ставрополь"
+        },
+        {
+          "src": "assets/photos/school21-stavropol-meeting-editorial.jpg",
+          "alt": "Встреча с командой в кампусе Школы 21 в Ставрополе",
+          "caption": "Встреча с командой · Ставрополь"
+        },
+        {
+          "src": "assets/photos/school21-stavropol-camera-editorial.jpg",
+          "alt": "Съёмочная площадка на мероприятии Школы 21 в Ставрополе",
+          "caption": "Многокамерная съёмка · Ставрополь"
+        },
+        {
           "src": "assets/photos/school21-stavropol.jpg",
           "alt": "Команда на открытии кампуса Школы 21 в Ставрополе",
           "caption": "Команда проекта · Ставрополь"
