@@ -5,9 +5,9 @@ window.PORTFOLIO = {
     "role": "Руководитель технического производства мероприятий",
     "location": "Рассматриваю предложения в Москве",
     "portrait": {
-      "src": "assets/photos/01-portrait-bw.png",
+      "src": "assets/photos/portrait-alexander.jpg",
       "alt": "Александр Тюрин",
-      "position": "50% 35%"
+      "position": "50% 5%"
     },
     "contacts": {
       "phone": "+7 918 186-95-18",
