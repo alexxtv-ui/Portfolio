@@ -107,3 +107,6 @@ dialog{background:#f1efe9;color:var(--text);border-color:#b5a49a}dialog::backdro
 
 /* iOS-safe line arrows */
 .arrow-icon{display:inline-block;width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;flex:0 0 auto}.hero-copy h1 sup{font-size:0;line-height:0;vertical-align:super;display:inline-flex;margin-left:clamp(12px,2vw,22px);color:var(--accent)}.hero-copy h1 sup .arrow-icon{width:clamp(30px,3.2vw,44px);height:clamp(30px,3.2vw,44px)}.hero-actions .button .arrow-icon{width:18px;height:18px;margin-left:14px}.nav-contact .arrow-icon{width:13px;height:13px;margin-left:16px}.step b .arrow-icon{width:15px;height:15px}.project-open .arrow-icon{width:17px;height:17px;margin-left:8px;color:var(--accent)}.art-open .arrow-icon{width:24px;height:24px}.contact-link .arrow-icon,.footer a .arrow-icon{width:12px;height:12px;margin-left:12px;color:var(--accent)}.gallery-controls button .arrow-icon{width:17px;height:17px}
+
+.reliability-note{margin:18px 0 0;color:var(--muted);font-size:13px;line-height:1.65;max-width:760px;border-left:2px solid var(--accent);padding-left:14px}.hero-role-en{font-family:var(--sans);font-size:.72em;color:var(--muted);font-weight:400}
+@media print{.reliability-note{color:#333!important;border-color:#842536!important}.hero-role-en{color:#444!important}}

@@ -19,6 +19,11 @@
   let photoIndex = 0;
   let trigger = null;
 
+  const timeline = $("#experience-timeline");
+  if (timeline && Array.isArray(data.experience)) {
+    timeline.innerHTML = data.experience.map(job => '<article class="job"><div class="job-date">' + escape(job.period) + '</div><h3>' + escape(job.organization) + '</h3><p class="job-role">' + escape(job.role) + '</p><p>' + escape(job.description) + '</p>' + (job.tasks?.length ? '<ul>' + job.tasks.map(task => '<li>' + escape(task) + '</li>').join('') + '</ul>' : '') + '</article>').join('');
+  }
+
   function artHTML(p, index) {
     return '<span class="art-grid" aria-hidden="true"></span><span class="art-geometry" aria-hidden="true"></span>' +
       '<span class="art-id" aria-hidden="true">PROJECT / 0' + (index+1) + '</span>' +
@@ -273,7 +278,7 @@
     img.alt = portrait.alt || "Александр Тюрин";
     img.style.objectPosition = portrait.position || "50% 35%";
     img.decoding = "async";
-    img.addEventListener("load", () => { $(".portrait-art", figure).hidden = true; $(".portrait-status", figure).textContent = "Руководитель событийных проектов"; });
+    img.addEventListener("load", () => { $(".portrait-art", figure).hidden = true; $(".portrait-caption", figure).textContent = portrait.caption || data.profile.name; $(".portrait-status", figure).textContent = portrait.status || data.profile.role; });
     img.addEventListener("error", () => { img.remove(); $(".portrait-art", figure).hidden = false; $(".portrait-status", figure).textContent = "Место для портрета"; });
     figure.prepend(img);
   }
