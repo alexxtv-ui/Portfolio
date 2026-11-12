@@ -5,8 +5,7 @@ window.PORTFOLIO = {
     "role": "Руководитель технического производства мероприятий",
     "location": "Рассматриваю предложения в Москве",
     "portrait": {
-      "src": "assets/photos/portrait-alexander.jpg",
-      "expandedSrc": "assets/photos/portrait-alexander.jpg",
+      "src": "assets/photos/portrait-alexander-wide.jpg",
       "alt": "Александр Тюрин",
       "position": "50% 50%"
     },
