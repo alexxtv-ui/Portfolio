@@ -6,8 +6,9 @@ window.PORTFOLIO = {
     "location": "Рассматриваю предложения в Москве",
     "portrait": {
       "src": "assets/photos/portrait-alexander.jpg",
+      "expandedSrc": "assets/photos/portrait-alexander.jpg",
       "alt": "Александр Тюрин",
-      "position": "50% 5%"
+      "position": "50% 50%"
     },
     "contacts": {
       "phone": "+7 918 186-95-18",

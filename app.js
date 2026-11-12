@@ -273,7 +273,9 @@
   const portrait = data.profile?.portrait;
   if (safeImage(portrait?.src)) {
     const figure = $("#portrait");
+    if (safeImage(portrait.expandedSrc)) figure.style.setProperty("--portrait-wide-bg", `url("${safeImage(portrait.expandedSrc)}")`);
     const img = document.createElement("img");
+    img.className = "portrait-original";
     img.src = safeImage(portrait.src);
     img.alt = portrait.alt || "Александр Тюрин";
     img.style.objectPosition = portrait.position || "50% 35%";

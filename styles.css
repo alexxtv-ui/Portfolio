@@ -110,3 +110,5 @@ dialog{background:#f1efe9;color:var(--text);border-color:#b5a49a}dialog::backdro
 
 .reliability-note{margin:18px 0 0;color:var(--muted);font-size:13px;line-height:1.65;max-width:760px;border-left:2px solid var(--accent);padding-left:14px}.hero-role-en{font-family:var(--sans);font-size:.72em;color:var(--muted);font-weight:400}
 @media print{.reliability-note{color:#333!important;border-color:#842536!important}.hero-role-en{color:#444!important}}
+
+.portrait{isolation:isolate}.portrait::before{content:"";position:absolute;z-index:0;inset:-14px;background:var(--portrait-wide-bg) center/cover no-repeat;filter:blur(16px) brightness(.72);transform:scale(1.04)}.portrait>img.portrait-original{position:absolute;z-index:1;top:0;left:50%;width:auto;height:100%;max-width:100%;object-fit:contain;object-position:center;transform:translateX(-50%)}.portrait figcaption{z-index:2}
